@@ -8,4 +8,4 @@ def test_addition():
 def test_subtraction():
     '''Test that subtraction function works '''
     assert subtract(2, 2) == 0
-	
+
