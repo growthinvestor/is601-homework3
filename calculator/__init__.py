@@ -1,28 +1,43 @@
-from calculator.calculation import Calculation
-from calculator.operations import add, exponentiate, modulus, subtract, multiply, divide
+# Import necessary modules and classes
+from calculator.calculations import Calculations  # Manages history of calculations
+from calculator.operations import add, subtract, multiply, divide, modulus, exponentiate  # Arithmetic operations
+from calculator.calculation import Calculation  # Represents a single calculation
+from decimal import Decimal  # For high-precision arithmetic
+from typing import Callable  # For type hinting callable objects
 
+# Definition of the Calculator class
 class Calculator:
     @staticmethod
-    def add(a,b):
-        calculation = Calculation(a, b, add)  # Pass the add function from calculator.operations
-        return calculation.get_result()
+    def _perform_operation(a: Decimal, b: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+        """Create and perform a calculation, then return the result."""
+        
+        calculation = Calculation.create(a, b, operation)
+       
+        Calculations.add_calculation(calculation)
+        
+        return calculation.perform()
+
     @staticmethod
-    def subtract(a,b):
-        calculation = Calculation(a, b, subtract)  # Pass the add function from calculator.operations
-        return calculation.get_result()
+    def add(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, add)
+
     @staticmethod
-    def multiply (a,b):
-        calculation = Calculation(a, b, multiply)  # Pass the add function from calculator.operations
-        return calculation.get_result()
+    def subtract(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, subtract)
+
     @staticmethod
-    def divide(a,b):
-        calculation = Calculation(a, b, divide)  # Pass the add function from calculator.operations
-        return calculation.get_result()
+    def multiply(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, multiply)
+
     @staticmethod
-    def exponentiate(a, b):
-        calculation = Calculation(a, b, exponentiate) # Pass the add function from calculator.operations
-        return calculation.get_result()
+    def divide(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, divide)
+    
     @staticmethod
-    def modulus(a, b):
-        calculation = Calculation(a, b, modulus)
-        return calculation.get_result()
+    def modulus(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, modulus)
+
+    @staticmethod
+    def exponentiate(a: Decimal, b: Decimal) -> Decimal:
+        return Calculator._perform_operation(a, b, exponentiate)
+
