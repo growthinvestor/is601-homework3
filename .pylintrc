@@ -1,4 +1,5 @@
 [MASTER]
+
 # A list of file extensions of the files that will be checked for Python code
 init-hook='import sys; sys.path.append(".")'
 extension-pkg-whitelist=pydantic
@@ -8,6 +9,7 @@ load-plugins=pylint_django
 # Only show these errors
 # Disable the following checks (example list):
 disable=trailing-whitespace
+
 
 [REPORTS]
 # Set the output format. Available formats: text, parseable, colorized, json, msvs (visual studio) and html
